@@ -1,17 +1,18 @@
 {
-    "name": "dipeshsukhia/laravel-html-minify",
-    "description": "laravel minify html output",
+    "name": "0x1881/laravel-html-minify",
+    "description": "laravel minify html output with regex",
     "keywords": [
-        "dipeshsukhia",
+        "0x1881",
+        "laravel",
         "laravel-html-minify"
     ],
-    "homepage": "https://github.com/dipeshsukhia/laravel-html-minify",
+    "homepage": "https://github.com/0X1881/laravel-html-minify",
     "license": "MIT",
     "type": "library",
     "authors": [
         {
-            "name": "Dipesh Sukhia",
-            "email": "dipesh.sukhia@gmail.com",
+            "name": "Mehmet Can",
+            "email": "1881x0@gmail.com",
             "role": "Developer"
         }
     ],
@@ -25,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "DipeshSukhia\\LaravelHtmlMinify\\": "src"
+            "C4N\\LaravelHtmlMinify\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DipeshSukhia\\LaravelHtmlMinify\\Tests\\": "tests"
+            "C4N\\LaravelHtmlMinify\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -45,10 +46,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "DipeshSukhia\\LaravelHtmlMinify\\LaravelHtmlMinifyServiceProvider"
+                "C4N\\LaravelHtmlMinify\\LaravelHtmlMinifyServiceProvider"
             ],
             "aliases": {
-                "LaravelHtmlMinify": "DipeshSukhia\\LaravelHtmlMinify\\LaravelHtmlMinifyFacade"
+                "LaravelHtmlMinify": "C4N\\LaravelHtmlMinify\\LaravelHtmlMinifyFacade"
             }
         }
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace DipeshSukhia\LaravelHtmlMinify\Tests;
+namespace C4N\LaravelHtmlMinify\Tests;
 
 use PHPUnit\Framework\TestCase;
 

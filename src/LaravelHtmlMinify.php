@@ -1,6 +1,6 @@
 <?php
 
-namespace DipeshSukhia\LaravelHtmlMinify;
+namespace C4N\LaravelHtmlMinify;
 
 class LaravelHtmlMinify
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace DipeshSukhia\LaravelHtmlMinify;
+namespace C4N\LaravelHtmlMinify;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \DipeshSukhia\LaravelHtmlMinify\Skeleton\SkeletonClass
+ * @see \C4N\LaravelHtmlMinify\Skeleton\SkeletonClass
  */
 class LaravelHtmlMinifyFacade extends Facade
 {
