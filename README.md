@@ -14,7 +14,7 @@ Publish the config file if the defaults doesn't suite your needs:
 php artisan vendor:publish --tag=LaravelHtmlMinify
 ```
 
-The following config file will be published in config/analytics.php
+The following config file will be published in config/htmlminify.php
 ```php
 return [
     'enable' => env('HTML_MINIFY', true),
