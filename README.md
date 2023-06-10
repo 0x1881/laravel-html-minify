@@ -33,12 +33,12 @@ return [
 
 You should add middleware to your web middleware group within your app/Http/Kernel.php file:
 ```php
-\C4N\LaravelHtmlMinify\Middleware\LaravelHtmlMinify::class
+\C4N\LaravelHtmlMinify\Middlewares\LaravelHtmlMinify::class
 ```
 
 Add in ENV
 ```conf
-HTML_MINIFY=true
+LARAVEL_HTML_MINIFY=true
 ```
 
 ### Testing
