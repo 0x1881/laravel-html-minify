@@ -20,13 +20,13 @@ return [
     'enable' => env('LARAVEL_HTML_MINIFY', true),
 
     'skip_route' => [
-        'dashboard'
-        'dashboard.*'
+        'dashboard',
+        'dashboard.*',
     ],
 
     'skip_path' => [
         'admin',
-        'admin/*'
+        'admin/*',
     ],
 ];
 ```
