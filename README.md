@@ -14,21 +14,31 @@ Publish the config file if the defaults doesn't suite your needs:
 php artisan vendor:publish --tag=LaravelHtmlMinify
 ```
 
-The following config file will be published in config/htmlminify.php
+The following config file will be published in config/laravel-html-minify.php
 ```php
 return [
-    'enable' => env('HTML_MINIFY', true),
+    'enable' => env('LARAVEL_HTML_MINIFY', true),
+
+    'skip_route' => [
+        'dashboard'
+        'dashboard.*'
+    ],
+
+    'skip_path' => [
+        'admin',
+        'admin/*'
+    ],
 ];
 ```
 
 You should add middleware to your web middleware group within your app/Http/Kernel.php file:
 ```php
-\C4N\LaravelHtmlMinify\Middleware\LaravelMinifyHtml::class
+\C4N\LaravelHtmlMinify\Middleware\LaravelHtmlMinify::class
 ```
 
 Add in ENV
 ```conf
-HTML_MINIFY = true
+HTML_MINIFY=true
 ```
 
 ### Testing

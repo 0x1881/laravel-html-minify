@@ -1,6 +1,6 @@
 {
     "name": "0x1881/laravel-html-minify",
-    "description": "laravel minify html output with regex",
+    "description": "laravel html minify with regex",
     "keywords": [
         "0x1881",
         "laravel",
@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0"
+        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0|^10.0"
     },
     "require-dev": {
         "orchestra/testbench": "3.8.*",
@@ -27,7 +27,10 @@
     "autoload": {
         "psr-4": {
             "C4N\\LaravelHtmlMinify\\": "src"
-        }
+        },
+        "files": [
+            "Helpers/common.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -49,7 +52,7 @@
                 "C4N\\LaravelHtmlMinify\\LaravelHtmlMinifyServiceProvider"
             ],
             "aliases": {
-                "LaravelHtmlMinify": "C4N\\LaravelHtmlMinify\\LaravelHtmlMinifyFacade"
+                "LaravelHtmlMinify": "C4N\\LaravelHtmlMinify\\Facades\\LaravelHtmlMinify"
             }
         }
     }

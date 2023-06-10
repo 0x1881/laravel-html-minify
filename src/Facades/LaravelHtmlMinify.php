@@ -1,13 +1,13 @@
 <?php
 
-namespace C4N\LaravelHtmlMinify;
+namespace C4N\LaravelHtmlMinify\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
  * @see \C4N\LaravelHtmlMinify\Skeleton\SkeletonClass
  */
-class LaravelHtmlMinifyFacade extends Facade
+class LaravelHtmlMinify extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -19,8 +19,8 @@ class LaravelHtmlMinifyFacade extends Facade
         return 'laravel-html-minify';
     }
 
-    public static function htmlMinify($html = null)
+    public static function htmlMinify(string|null $html = null)
     {
-        return (new LaravelHtmlMinify())->htmlMinify($html);
+        return (new \C4N\LaravelHtmlMinify\LaravelHtmlMinify)->htmlMinify($html);
     }
 }
