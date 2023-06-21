@@ -4,6 +4,12 @@ namespace C4N\LaravelHtmlMinify;
 
 class LaravelHtmlMinify
 {
+  public array $saveTags = [
+    'pre',
+    'code',
+    'textarea',
+  ];
+
   public function htmlMinify(string|null $html = null)
   {
     $replace = [
@@ -94,14 +100,35 @@ class LaravelHtmlMinify
             %ix' => " "
     ];
 
-    
-    [$pre, $html] = $this->savePre($html);
-    
+    [$tags, $html] = $this->saveTags($html);
+
     $html = preg_replace(array_keys($replace), array_values($replace), $html);
 
     $html = preg_replace_callback('/(<[a-z\\-]+\\s)\\s*([^>]+>)/m', [$this, '_removeAttributeQuotes'], $html);
 
-    $html = $this->restorePre($html, $pre);
+    // Remove extra white-space(s) between HTML attribute(s)
+    $html = preg_replace_callback('#<([^\/\s<>!]+)(?:\s+([^<>]*?)\s*|\s*)(\/?)>#s', function ($matches) {
+      return '<' . $matches[1] . preg_replace('#([^\s=]+)(\=([\'"]?)(.*?)\3)?(\s+|$)#s', ' $1$2', $matches[2]) . $matches[3] . '>';
+    }, str_replace("\r", "", $html));
+
+    // Minify inline CSS declaration(s)
+    if (strpos($html, ' style=') !== false) {
+      $html = preg_replace_callback('#<([^<]+?)\s+style=([\'"])(.*?)\2(?=[\/\s>])#s', function ($matches) {
+        return '<' . $matches[1] . ' style=' . $matches[2] . minify_css($matches[3]) . $matches[2];
+      }, $html);
+    }
+    if (strpos($html, '</style>') !== false) {
+      $html = preg_replace_callback('#<style(.*?)>(.*?)</style>#is', function ($matches) {
+        return '<style' . $matches[1] . '>' . minify_css($matches[2]) . '</style>';
+      }, $html);
+    }
+    if (strpos($html, '</script>') !== false) {
+      $html = preg_replace_callback('#<script(.*?)>(.*?)</script>#is', function ($matches) {
+        return '<script' . $matches[1] . '>' . minify_js($matches[2]) . '</script>';
+      }, $html);
+    }
+
+    $html = $this->restoreTags($html, $tags);
 
     return $html;
   }
@@ -127,23 +154,26 @@ class LaravelHtmlMinify
     return $matches[1] . $matches[2];
   }
 
-  function savePre($input)
+  // https://github.com/lazev/r4initpack/blob/d38db9be957cb56a86399c4645268d15191521ad/utils/packer.php#L137
+  function saveTags($input)
   {
-    preg_match_all('|<pre(.*?)>(.*?)\</pre>|sim', $input, $pre);
-    foreach ($pre[0] as $key => $val) {
-      $input = str_replace($val, '<!~~SavePre' . $key . '~~>', $input);
+    $saveTags = implode('|', $this->saveTags);
+    preg_match_all("~\<({$saveTags})(.*?)\>(.*?)\<\/({$saveTags})\>~sim", $input, $tags);
+    foreach ($tags[0] as $key => $val) {
+      $input = str_replace($val, '<!~~SaveTags' . $key . '~~>', $input);
     }
 
     return [
-      $pre,
+      $tags,
       $input
     ];
   }
 
-  function restorePre(&$output, $pre)
+  // https://github.com/lazev/r4initpack/blob/d38db9be957cb56a86399c4645268d15191521ad/utils/packer.php#L137
+  function restoreTags(&$output, $tags)
   {
-    foreach ($pre[0] as $key => $val) {
-      $output = str_replace('<!~~SavePre' . $key . '~~>', $val, $output);
+    foreach ($tags[0] as $key => $val) {
+      $output = str_replace('<!~~SaveTags' . $key . '~~>', $val, $output);
     }
 
     return $output;
