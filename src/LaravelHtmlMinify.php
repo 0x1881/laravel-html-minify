@@ -106,10 +106,10 @@ class LaravelHtmlMinify
 
     $html = preg_replace_callback('/(<[a-z\\-]+\\s)\\s*([^>]+>)/m', [$this, '_removeAttributeQuotes'], $html);
 
-    // Remove extra white-space(s) between HTML attribute(s)
-    $html = preg_replace_callback('#<([^\/\s<>!]+)(?:\s+([^<>]*?)\s*|\s*)(\/?)>#s', function ($matches) {
-      return '<' . $matches[1] . preg_replace('#([^\s=]+)(\=([\'"]?)(.*?)\3)?(\s+|$)#s', ' $1$2', $matches[2]) . $matches[3] . '>';
-    }, str_replace("\r", "", $html));
+    // // Remove extra white-space(s) between HTML attribute(s)
+    // $html = preg_replace_callback('#<([^\/\s<>!]+)(?:\s+([^<>]*?)\s*|\s*)(\/?)>#s', function ($matches) {
+    //   return '<' . $matches[1] . preg_replace('#([^\s=]+)(\=([\'"]?)(.*?)\3)?(\s+|$)#s', ' $1$2', $matches[2]) . $matches[3] . '>';
+    // }, str_replace("\r", "", $html));
 
     // Minify inline CSS declaration(s)
     if (strpos($html, ' style=') !== false) {
